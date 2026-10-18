@@ -121,156 +121,199 @@
       flex: 1;
     }
 
-    /* NEW Welcome Banner Section Styles */
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .welcome {
-      display: grid;
-      min-height: 450px;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr);
-      align-items: center;
-      gap: 48px;
-      padding: 58px clamp(20px, 10vw, 140px) 64px;
-      background-color: #e9efe0;
-      background-image: radial-gradient(#c6d2bb 0.75px, transparent 0.75px);
-      background-size: 17px 17px;
-      animation: appear .5s ease both;
-      border-bottom-left-radius: 36px;
-      border-bottom-right-radius: 36px;
-    }
-
-    .welcome-copy {
-      max-width: 580px;
-    }
-
-    .eyebrow {
-      margin: 0 0 17px;
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-
-    .welcome h1 {
-      margin-bottom: 18px;
-      font-family: var(--serif);
-      font-size: clamp(44px, 6vw, 76px);
-      font-weight: 800;
-      line-height: 1;
-      color: var(--green-dark);
-    }
-
-    /* Justified Left Alignment for Welcome Banner Paragraph */
-    .welcome-copy > p:not(.eyebrow) {
-      max-width: 450px;
-      margin-bottom: 27px;
-      color: #58665e;
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 600;
-      text-align: justify;
-      text-align-last: left;
-      text-justify: inter-word;
-    }
-
-    .welcome-copy > p:not(.eyebrow) {
-      max-width: 450px;
-      margin-bottom: 27px;
-      color: #58665e;
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 600;
-    }
-
-    .start-button {
-      display: inline-flex;
-      min-height: 46px;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0 21px;
-      border: 0;
-      border-radius: 5px;
-      background: var(--green);
-      color: white;
-      font: 800 14px var(--sans);
-      cursor: pointer;
-      transition: transform .2s ease, background .2s ease;
-      text-decoration: none;
-    }
-
-    .start-button:hover {
-      transform: translateY(-2px);
-      background: var(--green-dark);
-    }
-
-    .arrow {
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .art-stage {
-      position: relative;
-      display: grid;
-      min-height: 300px;
-      place-items: center;
-    }
-
-    .art-main {
-      width: min(74%, 300px);
-      aspect-ratio: 1.12;
-      overflow: hidden;
-      transform: rotate(3deg);
-      border: 9px solid #fff;
-      border-radius: 9px;
-      box-shadow: 0 18px 38px #2346342b;
-      background-color: var(--mint);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .art-main img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .art-sticker {
-      position: absolute;
-      right: 5%;
-      bottom: 13%;
-      padding: 13px 16px;
-      transform: rotate(-5deg);
-      border-radius: 5px;
-      background: var(--yellow);
-      box-shadow: 0 8px 16px #23463422;
-      font-family: var(--serif);
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .art-note {
-      position: absolute;
-      top: 12%;
-      left: 2%;
-      padding: 12px 15px;
-      transform: rotate(-8deg);
-      border-radius: 5px;
-      background: var(--coral);
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--ink);
-    }
+    /* ================= HERO CSS ================= */
+ 
+  .pk-hero {
+    /* Easy-to-change colors */
+    --pk-ink: var(--green-dark, #17493C);   /* headings, button */
+    --pk-ink-soft: #2D5A4C;                 /* paragraph text */
+    --pk-green: #1F6B3E;                    /* pill text */
+    --pk-highlight: #FFE08A;                /* highlighter behind the headline */
+    --pk-bg-from: #CBE8D2;                  /* hero gradient start */
+    --pk-bg-to: #E1F4E7;                    /* hero gradient end */
+    --pk-below: #F5F3EA;                    /* background of the section under the hero */
+ 
+    position: relative;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;      /* the font in the design; use "inherit" for your site's font */
+    color: var(--pk-ink);
+    background: linear-gradient(135deg, var(--pk-bg-from) 0%, var(--pk-bg-to) 100%);
+  }
+  .pk-hero, .pk-hero * { box-sizing: border-box; }
+ 
+  /* Soft background circles */
+  .pk-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+  }
+  .pk-blob--left  { left: -140px; top: 140px; width: 380px; height: 380px; }
+  .pk-blob--right { right: -120px; top: -100px; width: 320px; height: 320px; background: rgba(255, 255, 255, 0.3); }
+ 
+  .pk-hero-inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 128px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: center;
+  }
+ 
+  /* ---------- Left: text ---------- */
+  .pk-hero-text {
+    flex: 1 1 480px;
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+ 
+  .pk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--pk-green);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+ 
+  .pk-title {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.12;
+    color: var(--pk-ink);
+  }
+ 
+  .pk-highlight {
+    background: linear-gradient(transparent 62%, var(--pk-highlight) 62%);
+  }
+ 
+  .pk-lead {
+    margin: 0;
+    max-width: 520px;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--pk-ink-soft);
+  }
+ 
+  .pk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-top: 8px;
+  }
+ 
+  .pk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 0 32px;
+    border-radius: 999px;
+    background: var(--pk-ink);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-decoration: none;
+    box-shadow: 0 6px 0 #0D2F25;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .pk-btn:hover {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #0D2F25;
+  }
+  .pk-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #0D2F25;
+  }
+ 
+  .pk-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--pk-ink);
+    text-decoration: underline;
+  }
+  .pk-link:hover { text-decoration-thickness: 3px; }
+ 
+  .pk-btn:focus-visible,
+  .pk-link:focus-visible {
+    outline: 3px solid var(--pk-ink);
+    outline-offset: 4px;
+  }
+ 
+  .pk-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pk-chips li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--pk-ink);
+  }
+  .pk-chips strong { margin-right: 6px; font-weight: 800; }
+ 
+  /* ---------- Right: your card image ---------- */
+  .pk-hero-visual {
+    flex: 1 1 380px;
+    display: flex;
+    justify-content: center;
+  }
+ 
+  .pk-hero-img {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+  }
+ 
+  /* Wavy bottom edge */
+  .pk-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    display: block;
+    width: 100%;
+    height: 72px;
+  }
+  .pk-wave path { fill: var(--pk-below); }
+ 
+  /* Phones */
+  @media (max-width: 600px) {
+    .pk-hero-inner { padding: 40px 20px 112px; gap: 24px; }
+    .pk-hero-visual { flex-basis: 100%; }
+    .pk-hero-img { max-width: 340px; }
+    .pk-btn { width: 100%; justify-content: center; }
+  }
+ 
+  @media (prefers-reduced-motion: reduce) {
+    .pk-btn { transition: none; }
+  }
+ 
+  /* =============== END HERO CSS =============== */
 
     /* Decks Section */
     .decks-section {
@@ -641,25 +684,52 @@
   </header>
 
   <main>
-    <!-- 2. NEW Welcoming Banner Section -->
-    <section class="welcome">
-      <div class="welcome-copy">
-        <p class="eyebrow">WELCOME TO PILIPIKNOW</p>
-        <h1>Learn new English words, one card at a time</h1>
-        <p>Colorful, interactive flashcards that make vocabulary fun and easy for young learners.</p>
-        <a href="#decks" class="start-button">
-          Start Learning <span class="arrow">&rarr;</span>
+    <section class="pk-hero" aria-labelledby="pk-hero-title">
+ 
+  <span class="pk-blob pk-blob--left" aria-hidden="true"></span>
+  <span class="pk-blob pk-blob--right" aria-hidden="true"></span>
+ 
+  <div class="pk-hero-inner">
+ 
+    <!-- Left: text -->
+    <div class="pk-hero-text">
+      <span class="pk-pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0Z" fill="#F2B632"></path></svg>
+        Welcome to PilipiKnow
+      </span>
+ 
+      <h1 class="pk-title" id="pk-hero-title">Learn new English words, <span class="pk-highlight">one card at a time.</span></h1>
+ 
+      <p class="pk-lead">Colorful, interactive flashcards that make vocabulary fun and easy for young Filipino learners.</p>
+ 
+      <div class="pk-actions">
+        <a class="pk-btn" href="#decks">
+          Start Learning
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
         </a>
       </div>
+ 
+      <ul class="pk-chips">
+        <li><strong>28</strong> cards</li>
+        <li><strong>3</strong> decks</li>
+        <li>Made for Grade 1</li>
+      </ul>
+    </div>
+ 
+    <!-- Right: hero card image -->
+    <div class="pk-hero-visual">
+      <img class="pk-hero-img" src="PilipiKnow_Card%20for%20Hero-01.png" alt="A flashcard showing an apple, with a cat and a cow sticker beside it">
+    </div>
+ 
+  </div>
+ 
+  <!-- Wavy bottom edge -->
+  <svg class="pk-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C180 80 360 80 540 48 C720 16 900 8 1080 32 C1260 56 1350 56 1440 40 L1440 80 L0 80 Z"></path>
+  </svg>
+</section>
 
-      <div class="art-stage">
-        <div class="art-note">Interactive!</div>
-        <div class="art-main">
-          <img src="PilipiKnow_Logo-01-cropped.png" alt="Flashcard preview" onerror="this.style.display='none'; this.parentElement.innerText='✨ PilipiKnow ✨';">
-        </div>
-        <div class="art-sticker">Grade 1 🌟</div>
-      </div>
-    </section>
+<!-- =============== END HERO HTML =============== -->
 
     <!-- 3. Decks Section: 3 Rounded Colorful Boxes -->
     <section class="decks-section" id="decks">
