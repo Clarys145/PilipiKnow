@@ -104,6 +104,53 @@
       font-weight: 700;
     }
 
+/* Sound on/off button */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sound-toggle {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: #eef2f7;
+      color: #20332d;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .sound-toggle:hover {
+      background: #dfe8ef;
+    }
+
+    .sound-toggle:focus-visible {
+      outline: 3px solid #1e725b;
+      outline-offset: 2px;
+    }
+
+    .sound-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .sound-toggle .slash {
+      display: none;
+    }
+
+    .sound-toggle.is-muted .waves {
+      display: none;
+    }
+
+    .sound-toggle.is-muted .slash {
+      display: inline;
+    }
+
     /* Main Full-Screen Workspace */
     .main-workspace {
       flex: 1;
@@ -361,6 +408,14 @@
       <img src="PilipiKnow_Logo-01-cropped.png" alt="PilipiKnow logo" class="logo-icon">
       <span class="logo-text">Pilipi<span>Know</span></span>
     </a>
+    <div class="nav-right">
+      <button class="sound-toggle" id="soundToggle" type="button" aria-label="Sound is on. Turn sound off">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"></path>
+          <path class="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"></path>
+          <path class="slash" d="M16 9l5 6M21 9l-5 6"></path>
+        </svg>
+      </button>
     <div class="counter" id="counterText">Card 1 of 10</div>
   </header>
 
@@ -491,6 +546,102 @@
       });
     }
 
+    // ---------- Sound effects ----------
+    // Made with the Web Audio API, so there are no audio files to upload.
+    // To make a sound louder or quieter, change the "volume" numbers below.
+    const Sound = (function () {
+      let ctx = null;
+      let muted = false;
+      try { muted = localStorage.getItem('pilipiknow-muted') === '1'; } catch (e) {}
+
+      function context() {
+        if (!ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return null;
+          ctx = new AudioCtx();
+        }
+        if (ctx.state === 'suspended') ctx.resume();
+        return ctx;
+      }
+
+      // A soft "whoosh" made from filtered noise
+      function whoosh(c, start, length, fromHz, toHz, volume) {
+        const frames = Math.floor(c.sampleRate * length);
+        const buffer = c.createBuffer(1, frames, c.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < frames; i++) data[i] = Math.random() * 2 - 1;
+
+        const source = c.createBufferSource();
+        source.buffer = buffer;
+
+        const filter = c.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.Q.value = 1.1;
+        filter.frequency.setValueAtTime(fromHz, start);
+        filter.frequency.exponentialRampToValueAtTime(toHz, start + length);
+
+        const gain = c.createGain();
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(volume, start + length * 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + length);
+
+        source.connect(filter);
+        filter.connect(gain);
+        gain.connect(c.destination);
+        source.start(start);
+        source.stop(start + length);
+      }
+
+      // A short, round note
+      function note(c, start, hz, length, volume, type) {
+        const osc = c.createOscillator();
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(hz, start);
+
+        const gain = c.createGain();
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(volume, start + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + length);
+
+        osc.connect(gain);
+        gain.connect(c.destination);
+        osc.start(start);
+        osc.stop(start + length + 0.02);
+      }
+
+      const sounds = {
+        // Card flip: a quick whoosh and a tiny tick as it lands
+        flip: function (c, t) {
+          whoosh(c, t, 0.2, 800, 3200, 0.22);
+          note(c, t + 0.16, 880, 0.07, 0.07, 'triangle');
+        },
+        // Next card: two cheerful rising notes
+        next: function (c, t) {
+          note(c, t, 523.25, 0.14, 0.16, 'triangle');
+          note(c, t + 0.09, 783.99, 0.2, 0.16, 'triangle');
+        },
+        // Previous card: two softer falling notes
+        prev: function (c, t) {
+          note(c, t, 659.25, 0.14, 0.14, 'triangle');
+          note(c, t + 0.09, 440, 0.2, 0.14, 'triangle');
+        }
+      };
+
+      return {
+        play: function (name) {
+          if (muted || !sounds[name]) return;
+          const c = context();
+          if (!c) return;
+          sounds[name](c, c.currentTime);
+        },
+        isMuted: function () { return muted; },
+        setMuted: function (value) {
+          muted = value;
+          try { localStorage.setItem('pilipiknow-muted', value ? '1' : '0'); } catch (e) {}
+        }
+      };
+    })();
+
     let currentIndex = 0;
     const cards = document.querySelectorAll('.flashcard-item');
     const totalCards = cards.length;
@@ -524,11 +675,35 @@
     }
 
     function changeCard(direction) {
+      const before = currentIndex;
       currentIndex += direction;
       if (currentIndex < 0) currentIndex = 0;
       if (currentIndex >= totalCards) currentIndex = totalCards - 1;
+      if (currentIndex !== before) Sound.play(direction > 0 ? 'next' : 'prev');
       updateApp();
     }
+
+    // Flip sound: one listener covers every card
+    document.querySelector('.deck-container').addEventListener('click', function (event) {
+      if (event.target.closest('.card')) Sound.play('flip');
+    });
+
+    // Sound on/off button
+    const soundToggle = document.getElementById('soundToggle');
+
+    function renderSoundToggle() {
+      const muted = Sound.isMuted();
+      soundToggle.classList.toggle('is-muted', muted);
+      soundToggle.setAttribute('aria-label', muted ? 'Sound is off. Turn sound on' : 'Sound is on. Turn sound off');
+    }
+
+    soundToggle.addEventListener('click', function () {
+      Sound.setMuted(!Sound.isMuted());
+      renderSoundToggle();
+      Sound.play('next'); // a small confirmation sound when turning sound back on
+    });
+
+    renderSoundToggle();
   </script>
 
 </body>
