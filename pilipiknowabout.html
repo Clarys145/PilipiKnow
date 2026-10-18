@@ -193,7 +193,7 @@
 
     .vm-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 24px;
     }
 
@@ -448,44 +448,125 @@
       font-weight: 600;
     }
 
-    @media (max-width: 600px) {
-      .footer {
-        padding: 44px 20px 24px;
+    /* Tablet and mobile layouts */
+    @media (max-width: 900px) {
+      .navbar {
+        padding: 16px 24px;
       }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .hero-banner {
+        padding: 52px 24px;
+      }
+
+      .hero-banner h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-section,
+      .vm-section {
+        max-width: 760px;
+      }
+
+      .about-card {
+        padding: 38px 32px;
+      }
+
+      .vm-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .footer-top {
-        gap: 28px;
-      }
-      .footer-about {
-        max-width: none;
-      }
-      .footer-col,
-      .footer-col--contact {
-        flex: 1 1 100%;
+        gap: 36px;
       }
     }
 
-    /* Mobile Responsive */
     @media (max-width: 600px) {
       .navbar {
-        padding: 15px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 16px;
+        padding: 12px 16px;
       }
+
+      .navbar nav {
+        width: 100%;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: clamp(16px, 7vw, 28px);
+      }
+
+      .nav-links a {
+        font-size: 0.95rem;
+      }
+
+      .hero-banner {
+        padding: 40px 20px;
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+      }
+
       .hero-banner h1 {
-        font-size: 2rem;
+        font-size: clamp(2rem, 9vw, 2.6rem);
       }
+
       .hero-banner p {
-        font-size: 1rem;
+        font-size: 1.05rem;
       }
+
+      .about-section {
+        margin: 36px auto 24px;
+      }
+
       .about-card {
         padding: 30px 24px;
+        border-radius: 24px;
       }
+
       .about-card p,
       .vm-card p {
         font-size: 1.05rem;
         text-align: justify;
         text-align-last: center;
       }
+
+      .vm-section {
+        margin-bottom: 44px;
+      }
+
+      .vm-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+
       .vm-card {
         padding: 28px 22px;
+      }
+
+      .footer {
+        padding: 44px 20px 24px;
+      }
+
+      .footer-top {
+        gap: 28px;
+      }
+
+      .footer-about {
+        max-width: none;
+        flex-basis: 100%;
+      }
+
+      .footer-col {
+        flex: 1 1 calc(50% - 14px);
+      }
+
+      .footer-col--contact {
+        flex-basis: 100%;
       }
     }
   </style>
