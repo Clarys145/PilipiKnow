@@ -20,6 +20,7 @@
       --mint: #c9e9d1;
       --coral: #f4b09b;
       --lightgreen: #5db66c;
+      --yellow: #f4dc78;
     }
 
     * {
@@ -57,10 +58,19 @@
       text-decoration: none;
     }
 
-    /* Logo Icon Styling */
+    /* Logo Icon with Mint background */
     .logo-icon {
       width: 40px;
       height: 40px;
+      background-color: var(--mint);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(244, 220, 120, 0.4);
       object-fit: contain;
     }
 
@@ -272,7 +282,187 @@
       pointer-events: none;
     }
 
-    
+    /* Footer styling matches index.html */
+    .footer {
+      background-color: var(--green-dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 56px 20px 24px 20px;
+      margin-top: auto;
+      color: #ffffff;
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      text-align: left;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+    }
+
+    .footer-about {
+      flex: 1 1 280px;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo-img {
+      box-sizing: border-box;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      object-fit: contain;
+      padding: 5px;
+      border-radius: 50%;
+      background-color: var(--mint);
+    }
+
+    .footer-brand {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--yellow);
+    }
+
+    .footer-brand span {
+      color: var(--yellow);
+    }
+
+    .footer-tagline {
+      margin: 0;
+      color: rgba(201, 233, 209, 0.7);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .footer-col {
+      flex: 0 1 170px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-col--contact {
+      flex-basis: 240px;
+    }
+
+    .footer-heading {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--mint);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: 8px;
+      padding: 0 20px;
+      border: 2px solid var(--yellow);
+      border-radius: 999px;
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .footer-button:hover {
+      background-color: var(--yellow);
+      color: var(--green-dark);
+    }
+
+    .footer-links a:focus-visible,
+    .footer-button:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-credits {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: rgba(201, 233, 209, 0.7);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .footer-copy {
+      color: rgba(201, 233, 209, 0.7);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .footer {
+        padding: 44px 20px 24px;
+      }
+      .footer-top {
+        gap: 28px;
+      }
+      .footer-about {
+        max-width: none;
+      }
+      .footer-col,
+      .footer-col--contact {
+        flex: 1 1 100%;
+      }
+    }
 
     /* Mobile Responsive */
     @media (max-width: 600px) {
@@ -375,13 +565,50 @@
   <!-- 5. Footer for PilipiKnow -->
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-brand">Pili<span>PiKnow</span></div>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#decks">Flashcard Decks</a></li>
-        <li><a href="pilipiknowabout.html">About Us</a></li>
-      </ul>
-      <p class="footer-copy">&copy; 2026 PilipiKnow. All rights reserved.</p>
+      <div class="footer-top">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <img class="footer-logo-img" src="PilipiKnow_Logo-01-cropped.png" alt="PilipiKnow logo" width="52" height="52">
+            <div class="footer-brand">Pilipi<span>Know</span></div>
+          </div>
+          <p class="footer-tagline">Visually-Engaging Flashcards for Young Filipino Learners.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Explore">
+          <h2 class="footer-heading">Explore</h2>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#decks">Decks</a></li>
+            <li><a href="pilipiknowabout.html">About</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="Legal">
+          <h2 class="footer-heading">Legal</h2>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col footer-col--contact">
+          <h2 class="footer-heading">Contact</h2>
+          <ul class="footer-links">
+            <li><a href="mailto:[email address]">[email address]</a></li>
+          </ul>
+          <a class="footer-button" href="#">Send us feedback</a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <div class="footer-credits">
+          <span>A research project of Siriban, De Guzman, &amp; Santillan, Lyceum of the Philippines University-Manila.</span>
+          <span>Illustrations by Siriban, De Guzman, &amp; Santillan.</span>
+        </div>
+        <p class="footer-copy">&copy; 2026 PilipiKnow. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 

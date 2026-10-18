@@ -33,7 +33,7 @@
     /* Top Navigation Bar */
     .navbar {
       background-color: #ffffff;
-      padding: 15px 30px;
+      padding: 18px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -52,10 +52,19 @@
     .logo-icon {
       width: 40px;
       height: 40px;
+      background-color: #c9e9d1;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #20332d;
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(244, 220, 120, 0.4);
       object-fit: contain;
     }
 
-    .navbar h1 {
+    .logo-text {
       margin: 0;
       font-size: 1.6rem;
       font-weight: 800;
@@ -63,7 +72,7 @@
       letter-spacing: -0.5px;
     }
 
-    .navbar h1 span {
+    .logo-text span {
       color: #6bb66b;
     }
 
@@ -235,7 +244,7 @@
   <header class="navbar">
     <a href="index.html" class="navbar-brand">
       <img src="PilipiKnow_Logo-01-cropped.png" alt="PilipiKnow logo" class="logo-icon">
-      <h1>PiliPi<span>Know</span></h1>
+      <span class="logo-text">Pilipi<span>Know</span></span>
     </a>
     <div class="counter" id="counterText">Card 1 of 10</div>
   </header>
