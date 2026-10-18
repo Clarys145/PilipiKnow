@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - PilipiKnow</title>
+  
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f5ec;
+      --ink: #20332d;
+      --green: #1e725b;
+      --green-dark: #174d40;
+      --mint: #c9e9d1;
+      --coral: #f4b09b;
+      --lightgreen: #5db66c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      background-color: #ffffff;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    /* Logo Icon Styling */
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: #6bb66b;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus,
+    .nav-links a:active,
+    .nav-links a[aria-current="page"] {
+      color: #6bb66b;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+    }
+
+    /* Welcoming Banner Section */
+    .hero-banner {
+      background: linear-gradient(135deg, var(--mint) 0%, #e2f5e7 100%);
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom-left-radius: 36px;
+      border-bottom-right-radius: 36px;
+      box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .hero-content {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: #ffffff;
+      color: var(--green);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-banner h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-banner p {
+      font-size: 1.2rem;
+      color: var(--ink);
+      line-height: 1.6;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* About Section */
+    .about-section {
+      max-width: 900px;
+      margin: 50px auto 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Single Large Rounded Box for About */
+    .about-card {
+      background-color: #ffffff;
+      border-radius: 28px;
+      padding: 44px 40px;
+      box-shadow: 0 10px 30px rgba(32, 51, 45, 0.08);
+      border: 2px solid var(--mint);
+      position: relative;
+      overflow: hidden;
+      text-align: center; /* Centers header elements */
+    }
+
+    .about-card p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--ink);
+      font-weight: 600;
+      text-align: justify;
+      text-align-last: center; /* Justifies paragraph and centers last line */
+      text-justify: inter-word;
+    }
+
+    /* Vision & Mission Grid Section */
+    .vm-section {
+      max-width: 900px;
+      margin: 0 auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .vm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .vm-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 36px 30px;
+      box-shadow: 0 8px 24px rgba(32, 51, 45, 0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center-aligns icon, header, and content */
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .vm-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(32, 51, 45, 0.12);
+    }
+
+    .vm-card.vision-card {
+      border-top: 6px solid var(--green);
+    }
+
+    .vm-card.mission-card {
+      border-top: 6px solid var(--coral);
+    }
+
+    .vm-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .vm-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .vision-card .vm-icon-wrapper {
+      background-color: var(--mint);
+      color: var(--green-dark);
+    }
+
+    .mission-card .vm-icon-wrapper {
+      background-color: #fce4dd;
+      color: #d96f4e;
+    }
+
+    .vm-card h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      text-align: center;
+    }
+
+    .vm-card p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--ink);
+      font-weight: 600;
+      opacity: 0.9;
+      text-align: justify;
+      text-align-last: center; /* Justifies text while centering the last line */
+      text-justify: inter-word;
+    }
+
+    /* Background Watermark Decoration */
+    .about-bg-icon {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      font-size: 10rem;
+      opacity: 0.08;
+      user-select: none;
+      pointer-events: none;
+    }
+
+        /* Footer - Green Dark with Yellow Branding */
+    .footer {
+      background-color: var(--green-dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 20px 24px 20px;
+      margin-top: auto;
+      color: #ffffff;
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+
+    .footer-brand span {
+      color: var(--yellow);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--mint);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-copy {
+      color: rgba(201, 233, 209, 0.7);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 15px 20px;
+      }
+      .hero-banner h1 {
+        font-size: 2rem;
+      }
+      .hero-banner p {
+        font-size: 1rem;
+      }
+      .about-card {
+        padding: 30px 24px;
+      }
+      .about-card p,
+      .vm-card p {
+        font-size: 1.05rem;
+        text-align: justify;
+        text-align-last: center;
+      }
+      .vm-card {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Upper Navigation Bar -->
+  <header class="navbar">
+    <!-- Upper Left Logo -->
+    <a href="pilipiknowhomepage.html" class="navbar-brand">
+      <img src="PilipiKnow_Logo-01-cropped.png" alt="PilipiKnow logo" class="logo-icon">
+      <span class="logo-text">Pilipi<span>Know</span></span>
+    </a>
+
+    <!-- Upper Right Navigation Bar -->
+    <nav>
+      <ul class="nav-links">
+        <li><a href="pilipiknowhomepage.html">Home</a></li>
+        <li><a href="pilipiknowhomepage.html#decks">Decks</a></li>
+        <li><a href="pilipiknowabout.html" aria-current="page">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 2. Welcoming Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <span class="hero-badge">Our Story & Purpose</span>
+        <h1>About PilipiKnow</h1>
+        <p>Empowering young Filipino learners through interactive and engaging digital flashcard materials.</p>
+      </div>
+    </section>
+
+    <!-- 3. Single Rounded Box for About Paragraph -->
+    <section class="about-section">
+      <div class="about-card">
+        <p>
+          PilipiKnow is an educational digital flashcard set designed to spark curiosity, encourage participation, and build confidence among young learners. 
+          The project focuses on creating visually engaging flashcards to support the English literacy development of first-grade Filipino learners. 
+          Its main objective is to examine how these flashcards influence students’ vocabulary acquisition and comprehension.
+        </p>
+        <div class="about-bg-icon">📖</div>
+      </div>
+    </section>
+
+    <!-- 4. Vision and Mission Section -->
+    <section class="vm-section">
+      <div class="vm-grid">
+
+        <!-- Vision Card -->
+        <div class="vm-card vision-card">
+          <div class="vm-header">
+            <div class="vm-icon-wrapper">👁️</div>
+            <h2>Our Vision</h2>
+          </div>
+          <p>
+            To be a trusted learning companion for Filipino children, where every first-grade learner builds confidence in English and discovers the joy of learning through curiosity and play.
+          </p>
+        </div>
+
+        <!-- Mission Card -->
+        <div class="vm-card mission-card">
+          <div class="vm-header">
+            <div class="vm-icon-wrapper">🎯</div>
+            <h2>Our Mission</h2>
+          </div>
+          <p>
+            To create visually engaging digital flashcards that spark curiosity, encourage participation, and strengthen the vocabulary and comprehension of first-grade Filipino learners, while studying how these materials support their English literacy development.
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Footer for PilipiKnow -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">Pili<span>PiKnow</span></div>
+      <ul class="footer-links">
+        <li><a href="pilipiknowhomepage.html">Home</a></li>
+        <li><a href="pilipiknowhomepage.html#decks">Flashcard Decks</a></li>
+        <li><a href="pilipiknowabout.html">About Us</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2026 PilipiKnow. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
