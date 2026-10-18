@@ -282,12 +282,13 @@
     justify-content: center;
   }
  
-  .pk-hero-img {
-    display: block;
-    width: 100%;
-    max-width: 500px;
-    height: 500px;
-  }
+.pk-hero-img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  transform: scale(1.4);
+}
  
   /* Wavy bottom edge */
   .pk-wave {
@@ -301,10 +302,9 @@
   }
   .pk-wave path { fill: var(--pk-below); }
  
-  @media (prefers-reduced-motion: reduce) {
-    .pk-btn { transition: none; }
-  }
- 
+ @media (max-width: 600px) {
+  .pk-hero-img { transform: scale(1.15); }
+}
   /* =============== END HERO CSS =============== */
 
     /* Decks Section */
